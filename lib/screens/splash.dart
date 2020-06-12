@@ -44,7 +44,7 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Icon(
-                Icons.flag,
+                Icons.nature_people,
                 size: 150.0,
                 color: Theme.of(context).accentColor,
               ),

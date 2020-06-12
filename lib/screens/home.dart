@@ -46,33 +46,16 @@ class _HomeScreenState extends State<HomeScreen> {
                       title: Text("Personal"),
                     ),
                     ListTile(
-                      leading: Icon(Icons.videogame_asset),
-                      title: Text("Game"),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.landscape),
-                      title: Text("Your world"),
-                    ),
-                    ListTile(
                       leading: Icon(Icons.map),
+                      title: Text("Map"),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.card_giftcard),
+                      title: Text("Reward"),
+                    ),
+                    ListTile(
+                      leading: Icon(Icons.group_work),
                       title: Text("Real map"),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.store),
-                      title: Text("Your business"),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.message),
-                      title: Text("Chat"),
-                    ),
-                    Divider(),
-                    ListTile(
-                      leading: Icon(Icons.settings),
-                      title: Text("Setting"),
-                    ),
-                    ListTile(
-                      leading: Icon(Icons.perm_device_information),
-                      title: Text("About"),
                     ),
                   ],
                 ),
@@ -113,25 +96,19 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
             SizedBox(width: 8),
             IconButton(
-              icon: Icon(Icons.landscape),
-              color: Colors.white,
-              onPressed: () {},
-            ),
-            SizedBox(width: 8),
-            IconButton(
               icon: Icon(Icons.map),
               color: Colors.white,
               onPressed: () {},
             ),
             SizedBox(width: 8),
             IconButton(
-              icon: Icon(Icons.store),
+              icon: Icon(Icons.card_giftcard),
               color: Colors.white,
               onPressed: () {},
             ),
             SizedBox(width: 8),
             IconButton(
-              icon: Icon(Icons.message),
+              icon: Icon(Icons.group_work),
               color: Colors.white,
               onPressed: () {},
             ),
@@ -144,8 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blueGrey,
         onPressed: () {},
-        tooltip: 'Game',
-        child: Icon(Icons.videogame_asset),
+        child: Icon(Icons.autorenew),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,
     );
