@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/src/model/category.dart';
-import 'package:flutter_ecommerce_app/src/themes/light_color.dart';
-import 'package:flutter_ecommerce_app/src/themes/theme.dart';
-import 'package:flutter_ecommerce_app/src/widgets/title_text.dart';
-import 'package:flutter_ecommerce_app/src/widgets/extentions.dart';
+import 'package:kiuse/models/category.dart';
+import 'package:kiuse/themes/light_color.dart';
+import 'package:kiuse/themes/theme.dart';
+import 'package:kiuse/widgets/title_text.dart';
+import 'package:kiuse/widgets/extentions.dart';
 
 class ProductIcon extends StatelessWidget {
-  // final String imagePath;
-  // final String text;
   final ValueChanged<Category> onSelected;
   final Category model;
-  ProductIcon({Key key, this.model, this.onSelected}) : super(key: key);
+  final bool isSelected;
+
+  ProductIcon({Key key, this.model, this.isSelected, this.onSelected}) : super(key: key);
 
   Widget build(BuildContext context) {
     return model.id == null
@@ -22,16 +22,16 @@ class ProductIcon extends StatelessWidget {
               alignment: Alignment.center,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(10)),
-                color: model.isSelected
-                    ? LightColor.background
+                color: isSelected
+                    ? Theme.of(context).focusColor
                     : Colors.transparent,
                 border: Border.all(
-                  color: model.isSelected ? LightColor.orange : LightColor.grey,
-                  width: model.isSelected ? 2 : 1,
+                  color: isSelected ? LightColor.orange : LightColor.grey,
+                  width: isSelected ? 2 : 1,
                 ),
                 boxShadow: <BoxShadow>[
                   BoxShadow(
-                    color: model.isSelected ? Color(0xfffbf2ef) : Colors.white,
+                    color: isSelected ? Theme.of(context).primaryColor : Colors.white,
                     blurRadius: 10,
                     spreadRadius: 5,
                     offset: Offset(5, 5),
@@ -40,7 +40,7 @@ class ProductIcon extends StatelessWidget {
               ),
               child: Row(
                 children: <Widget>[
-                  model.image != null ? Image.asset(model.image) : SizedBox(),
+                  model.icon != null ? Image.asset(model.icon) : SizedBox(),
                   model.name == null
                       ? Container()
                       : Container(

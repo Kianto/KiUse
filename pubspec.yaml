@@ -14,14 +14,14 @@ dependencies:
 
   cupertino_icons: ^0.1.3
   google_fonts: ^0.3.9
-
-
+  google_maps_flutter: 0.5.25
+  geolocator: 5.3.0
 
   flutter_launcher_icons: 0.7.4
 
 # Run Terminal:
-  $ flutter pub get
-  $ flutter pub pub run flutter_launcher_icons:main
+#  $ flutter pub get
+#  $ flutter pub pub run flutter_launcher_icons:main
 flutter_icons:
   android: true
   ios: true

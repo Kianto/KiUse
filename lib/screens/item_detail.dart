@@ -1,28 +1,39 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/src/model/data.dart';
-import 'package:flutter_ecommerce_app/src/themes/light_color.dart';
-import 'package:flutter_ecommerce_app/src/themes/theme.dart';
-import 'package:flutter_ecommerce_app/src/widgets/title_text.dart';
-import 'package:flutter_ecommerce_app/src/widgets/extentions.dart';
+import 'package:kiuse/collectors/user_collector.dart';
+import 'package:kiuse/models/item.dart';
+import 'package:kiuse/models/user.dart';
+import 'package:kiuse/themes/light_color.dart';
+import 'package:kiuse/themes/theme.dart';
+import 'package:kiuse/widgets/title_text.dart';
+import 'package:kiuse/widgets/extentions.dart';
 
 class ProductDetailPage extends StatefulWidget {
-  ProductDetailPage({Key key}) : super(key: key);
+  ProductDetailPage({Key key, this.item}) : super(key: key);
+
+  final Item item;
 
   @override
   _ProductDetailPageState createState() => _ProductDetailPageState();
 }
 
-class _ProductDetailPageState extends State<ProductDetailPage>
-    with TickerProviderStateMixin {
+class _ProductDetailPageState extends State<ProductDetailPage> with TickerProviderStateMixin {
+
   AnimationController controller;
   Animation<double> animation;
+
+  User owner;
+
   @override
   void initState() {
     super.initState();
-    controller =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+    owner = UserCollector().getById(widget.item.ownerId);
+
+    controller = AnimationController(vsync: this, duration: Duration(milliseconds: 300));
+
     animation = Tween<double>(begin: 0, end: 1).animate(
-        CurvedAnimation(parent: controller, curve: Curves.easeInToLinear));
+      CurvedAnimation(parent: controller, curve: Curves.easeInToLinear)
+    );
+
     controller.forward();
   }
 
@@ -49,15 +60,6 @@ class _ProductDetailPageState extends State<ProductDetailPage>
               Navigator.of(context).pop();
             },
           ),
-          _icon(isLiked ? Icons.favorite : Icons.favorite_border,
-              color: isLiked ? LightColor.red : LightColor.lightGrey,
-              size: 15,
-              padding: 12,
-              isOutLine: false, onPressed: () {
-            setState(() {
-              isLiked = !isLiked;
-            });
-          }),
         ],
       ),
     );
@@ -117,48 +119,8 @@ class _ProductDetailPageState extends State<ProductDetailPage>
             fontSize: 160,
             color: LightColor.lightGrey,
           ),
-          Image.asset('assets/show_1.png')
+          Image.asset('assets/images/tree.png')
         ],
-      ),
-    );
-  }
-
-  Widget _categoryWidget() {
-    return Container(
-      margin: EdgeInsets.symmetric(vertical: 0),
-      width: AppTheme.fullWidth(context),
-      height: 80,
-      child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:
-              AppData.showThumbnailList.map((x) => _thumbnail(x)).toList()),
-    );
-  }
-
-  Widget _thumbnail(String image) {
-    return AnimatedBuilder(
-      animation: animation,
-      //  builder: null,
-      builder: (context, child) => AnimatedOpacity(
-        opacity: animation.value,
-        duration: Duration(milliseconds: 500),
-        child: child,
-      ),
-      child: Container(
-        margin: EdgeInsets.symmetric(horizontal: 10),
-        child: Container(
-          height: 40,
-          width: 50,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: LightColor.grey,
-            ),
-            borderRadius: BorderRadius.all(Radius.circular(13)),
-            // color: Theme.of(context).backgroundColor,
-          ),
-          child: Image.asset(image),
-        ).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(13))),
       ),
     );
   }
@@ -200,35 +162,22 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
-                      TitleText(text: "NIKE AIR MAX 200", fontSize: 25),
+                      TitleText(text: widget.item.name.toUpperCase(), fontSize: 25),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.end,
                         children: <Widget>[
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget>[
-                              TitleText(
-                                text: "\$ ",
-                                fontSize: 18,
-                                color: LightColor.red,
+                              Icon(
+                                Icons.local_florist,
+                                color: Theme.of(context).accentColor.withRed(0),
+                                size: 18,
                               ),
                               TitleText(
-                                text: "240",
+                                text: " ${widget.item.totalPoint}",
                                 fontSize: 25,
                               ),
-                            ],
-                          ),
-                          Row(
-                            children: <Widget>[
-                              Icon(Icons.star,
-                                  color: LightColor.yellowColor, size: 17),
-                              Icon(Icons.star,
-                                  color: LightColor.yellowColor, size: 17),
-                              Icon(Icons.star,
-                                  color: LightColor.yellowColor, size: 17),
-                              Icon(Icons.star,
-                                  color: LightColor.yellowColor, size: 17),
-                              Icon(Icons.star_border, size: 17),
                             ],
                           ),
                         ],
@@ -239,97 +188,12 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 SizedBox(
                   height: 20,
                 ),
-                _availableSize(),
-                SizedBox(
-                  height: 20,
-                ),
-                _availableColor(),
-                SizedBox(
-                  height: 20,
-                ),
                 _description(),
               ],
             ),
           ),
         );
       },
-    );
-  }
-
-  Widget _availableSize() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        TitleText(
-          text: "Available Size",
-          fontSize: 14,
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            _sizeWidget("US 6"),
-            _sizeWidget("US 7", isSelected: true),
-            _sizeWidget("US 8"),
-            _sizeWidget("US 9"),
-          ],
-        )
-      ],
-    );
-  }
-
-  Widget _sizeWidget(String text,
-      {Color color = LightColor.iconColor, bool isSelected = false}) {
-    return Container(
-      padding: EdgeInsets.all(10),
-      decoration: BoxDecoration(
-        border: Border.all(
-            color: LightColor.iconColor,
-            style: !isSelected ? BorderStyle.solid : BorderStyle.none),
-        borderRadius: BorderRadius.all(Radius.circular(13)),
-        color:
-            isSelected ? LightColor.orange : Theme.of(context).backgroundColor,
-      ),
-      child: TitleText(
-        text: text,
-        fontSize: 16,
-        color: isSelected ? LightColor.background : LightColor.titleTextColor,
-      ),
-    ).ripple(() {}, borderRadius: BorderRadius.all(Radius.circular(13)));
-  }
-
-  Widget _availableColor() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        TitleText(
-          text: "Available Size",
-          fontSize: 14,
-        ),
-        SizedBox(height: 20),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            _colorWidget(LightColor.yellowColor, isSelected: true),
-            SizedBox(
-              width: 30,
-            ),
-            _colorWidget(LightColor.lightBlue),
-            SizedBox(
-              width: 30,
-            ),
-            _colorWidget(LightColor.black),
-            SizedBox(
-              width: 30,
-            ),
-            _colorWidget(LightColor.red),
-            SizedBox(
-              width: 30,
-            ),
-            _colorWidget(LightColor.skyBlue),
-          ],
-        )
-      ],
     );
   }
 
@@ -352,28 +216,31 @@ class _ProductDetailPageState extends State<ProductDetailPage>
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         TitleText(
-          text: "Available Size",
+          text: owner.name,
           fontSize: 14,
         ),
+        Text(owner.address),
         SizedBox(height: 20),
-        Text(AppData.description),
+        Text(widget.item.amount),
+        Text(widget.item.description),
       ],
     );
   }
 
-  FloatingActionButton _flotingButton() {
+  FloatingActionButton _floatingButton() {
     return FloatingActionButton(
       onPressed: () {},
       backgroundColor: LightColor.orange,
-      child: Icon(Icons.shopping_basket,
-          color: Theme.of(context).floatingActionButtonTheme.backgroundColor),
+      child: Icon(Icons.phone_forwarded,
+        color: Theme.of(context).floatingActionButtonTheme.backgroundColor
+      ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: _flotingButton(),
+      floatingActionButton: _floatingButton(),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
@@ -391,7 +258,6 @@ class _ProductDetailPageState extends State<ProductDetailPage>
                 children: <Widget>[
                   _appBar(),
                   _productImage(),
-                  _categoryWidget(),
                 ],
               ),
               _detailWidget()

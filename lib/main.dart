@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:kiuse/collectors/user_collector.dart';
 import 'package:kiuse/screens/home.dart';
 import 'package:kiuse/screens/splash.dart';
 import 'package:kiuse/utils/constant.dart';
@@ -23,7 +24,7 @@ class MyApp extends StatelessWidget {
       theme: Constants.lightTheme,
       routes: {
         '/': (context) => SplashScreen(),
-        '/home': (context) => HomeScreen(),
+        '/home': (context) => HomeScreen(user: UserCollector.getSingletonUser()),
 
       },
     );
@@ -32,10 +33,10 @@ class MyApp extends StatelessWidget {
 
 /*
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/src/config/route.dart';
-import 'package:flutter_ecommerce_app/src/pages/mainPage.dart';
-import 'package:flutter_ecommerce_app/src/pages/product_detail.dart';
-import 'package:flutter_ecommerce_app/src/widgets/customRoute.dart';
+import 'package:kiuse/config/route.dart';
+import 'package:kiuse/pages/mainPage.dart';
+import 'package:kiuse/pages/item_detail.dart';
+import 'package:kiuse/widgets/customRoute.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'src/themes/theme.dart';

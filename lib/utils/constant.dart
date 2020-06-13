@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-class Constants{
 
-  static final String appName = "DEMO";
+abstract class Constants{
+
+  static final String appName = "KiUse";
 
   static final String title_AuthPhone = "Auth by Phone";
   static final String title_LoginEmail = "Auth by Email";
@@ -24,31 +25,32 @@ class Constants{
 
 
   static final String phoneNumber = "Phone Number";
-  static final String email = "Email";
   static final String password = "Password";
   static final String rePassword = "Re-password";
 
   static final String name = "Name";
+  static final String email = "Email";
+  static final String phone = "Phone";
+  static final String address = "Address";
 
-  static String msg_NoInternet = "No Internet";
-  static String msg_ServerError = "Error from Server, try later";
-  static String msg_Failure = "Request failed";
+  static final String youHere = "You're here";
+
+  static final String validate_NotEmpty = "This cannot be empty";
 
 
-  static String validate_NotEmpty = "This cannot be empty";
-
+  static final double padding = 20;
 
 
   // Colors for theme
-  static Color lightPrimary = Color(0xfffcfcff);
-  static Color darkPrimary = Colors.black;
-  static Color lightAccent = Colors.deepPurpleAccent;
-  static Color darkAccent = Colors.deepPurpleAccent[400];
-  static Color lightBG = Color(0xfffcfcff);
-  static Color darkBG = Colors.black;
-  static Color ratingBG = Colors.cyan[600];
+  static final Color lightPrimary = Color(0xffF4F4FA);
+  static final Color darkPrimary = Colors.black;
+  static final Color lightAccent = Color(0xffC9E289);
+  static final Color lightImageBG = Color(0xffB6D2E2);
+  static final Color darkAccent = Color(0xffFBC9A9);
+  static final Color lightBG = Color(0xffE5E7F1);
+  static final Color darkBG = Colors.black;
 
-  static ThemeData lightTheme = ThemeData(
+  static final ThemeData lightTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.light,
 
@@ -56,6 +58,7 @@ class Constants{
     primaryColor: lightPrimary,
     accentColor: lightAccent,
     cursorColor: lightAccent,
+    focusColor: lightImageBG,
     scaffoldBackgroundColor: lightBG,
     appBarTheme: AppBarTheme(
       textTheme: TextTheme(
@@ -71,7 +74,7 @@ class Constants{
     ),
   );
 
-  static ThemeData darkTheme = ThemeData(
+  static final ThemeData darkTheme = ThemeData(
     visualDensity: VisualDensity.adaptivePlatformDensity,
     brightness: Brightness.dark,
 

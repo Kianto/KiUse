@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_ecommerce_app/src/themes/light_color.dart';
-import 'package:flutter_ecommerce_app/src/widgets/BottomNavigationBar/bottom_curved_Painter.dart';
+import 'package:kiuse/themes/light_color.dart';
 
-class CustomBottomNavigationBar extends StatefulWidget {
+import 'bottom_curved_painter.dart';
+
+class Custombottom_bar extends StatefulWidget {
+  final List<IconData> icons;
   final Function(int) onIconPresedCallback;
-  CustomBottomNavigationBar({Key key, this.onIconPresedCallback})
+
+  Custombottom_bar({Key key, @required this.icons, this.onIconPresedCallback})
       : super(key: key);
 
   @override
-  _CustomBottomNavigationBarState createState() =>
-      _CustomBottomNavigationBarState();
+  _Custombottom_barState createState() =>
+      _Custombottom_barState();
 }
 
-class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
+class _Custombottom_barState extends State<Custombottom_bar>
     with TickerProviderStateMixin {
   int _selectedIndex = 0;
 
@@ -44,7 +47,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
   double _indexToPosition(int index) {
     // Calculate button positions based off of their
     // index (works with `MainAxisAlignment.spaceAround`)
-    const buttonCount = 4.0;
+    final double buttonCount = widget.icons.length * 1.0;
     final appWidth = MediaQuery.of(context).size.width;
     final buttonsWidth = _getButtonContainerWidth();
     final startX = (appWidth - buttonsWidth) / 2;
@@ -106,7 +109,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
             begin: Curves.easeInExpo.transform(_yController.value),
             end: inCurve.transform(_yController.value),
           ).transform(_yController.velocity.sign * 0.5 + 0.5),
-          Theme.of(context).backgroundColor),
+          Theme.of(context).accentColor
+      ),
     );
   }
 
@@ -161,16 +165,23 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar>
             height: height,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                _icon(Icons.home, _selectedIndex == 0, 0),
-                _icon(Icons.search, _selectedIndex == 1, 1),
-                _icon(Icons.card_travel, _selectedIndex == 2, 2),
-                _icon(Icons.favorite_border, _selectedIndex == 3, 3),
-              ],
+              children: _buildBottomIcons(widget.icons),
             ),
           ),
         ],
       ),
     );
   }
+
+  List<Widget> _buildBottomIcons(List<IconData> icons) {
+      var res = <Widget>[];
+
+      for (int i = 0; i < icons.length; i++) {
+        res.add(_icon(icons.elementAt(i), _selectedIndex == i, i));
+      }
+
+      return res;
+  }
+
 }
+

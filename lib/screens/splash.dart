@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:kiuse/screens/home.dart';
 import 'package:kiuse/utils/constant.dart';
 
 
@@ -43,13 +42,7 @@ class _SplashScreenState extends State<SplashScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Icon(
-                Icons.nature_people,
-                size: 150.0,
-                color: Theme.of(context).accentColor,
-              ),
-
-              SizedBox(width: 40.0),
+              Image.asset('assets/images/globe.png'),
 
               Container(
                 alignment: Alignment.center,
@@ -57,16 +50,17 @@ class _SplashScreenState extends State<SplashScreen> {
                   top: 15.0,
                 ),
                 child: Text(
-                  "${Constants.appName}",
+                  "${Constants.appName.toUpperCase()}",
                   style: TextStyle(
                     fontSize: 25.0,
                     fontWeight: FontWeight.w700,
-                    color: Theme.of(context).accentColor,
+                    color: Theme.of(context).accentColor.withRed(200),
                   ),
                 ),
               ),
             ],
           ),
+          
         ),
       ),
     );

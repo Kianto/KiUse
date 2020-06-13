@@ -1,7 +1,7 @@
 import 'package:kiuse/models/entity.dart';
 
 class Coupon extends Entity {
-  Coupon(String id) : super(id);
+  Coupon({String id, this.point, this.discount, this.description, this.gift, this.image}) : super(id);
 
   String gift;
   String image;
@@ -12,7 +12,7 @@ class Coupon extends Entity {
   String get discountPercent =>
       100 > discount ? '$discount %'
         : 100 == discount ? 'Free'
-          : 200 == discount ? 'Mua 1 tặng 1' : 'Chương trình nhận quà tại điểm';
+          : 200 == discount ? 'Buy 1 get 1 free' : 'Receive a special gift at KiUse';
 
 
 }
