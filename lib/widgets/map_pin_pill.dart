@@ -39,7 +39,7 @@ class MapPinPillComponentState extends State<MapPinPillComponent> {
               Container(
                 width: 50, height: 50,
                 margin: EdgeInsets.only(left: 10),
-                child: ClipRRect(child: Image.network(widget.currentlySelectedPin.image, fit: BoxFit.cover)),
+                child: ClipRRect(child: Image.asset(widget.currentlySelectedPin.image, fit: BoxFit.cover)),
               ),
               Expanded(
                 child: Container(

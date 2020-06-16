@@ -22,7 +22,14 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  Widget bodyScreen = AccountScreen();
+  Widget bodyScreen;
+
+  @override
+  void initState() {
+    super.initState();
+
+    bodyScreen = AccountScreen(user: widget.user);
+  }
 
   Widget _appBar() {
     return Container(

@@ -14,6 +14,7 @@ class UserPresenter {
          Item it = e;
          return it;
        }).toList();
+       res.add(i);
     }
 
     return res;
