@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:kiuse/collectors/category_collector.dart';
 import 'package:kiuse/collectors/item_collector.dart';
 import 'package:kiuse/models/category.dart';
-import 'file:///C:/Users/Kien/Workspace/mobile_projects/kiuse/lib/screens/item_detail.dart';
 import 'package:kiuse/themes/light_color.dart';
 import 'package:kiuse/themes/theme.dart';
 import 'package:kiuse/widgets/item_card.dart';
 import 'package:kiuse/widgets/item_icon.dart';
+
+import 'item_detail.dart';
 
 class RecycleScreen extends StatefulWidget {
   @override
@@ -86,9 +87,7 @@ class _RecycleScreenState extends State<RecycleScreen> {
               item: item,
               onSelected: (item) => Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (BuildContext context){
-                    return ProductDetailPage(item: item);
-                  },
+                  builder: (context) => ProductDetailPage(item: item),
                 ),
               )
           ),
@@ -108,16 +107,18 @@ class _RecycleScreenState extends State<RecycleScreen> {
               height: 40,
               alignment: Alignment.center,
               decoration: BoxDecoration(
-                  color: LightColor.lightGrey.withAlpha(100),
-                  borderRadius: BorderRadius.all(Radius.circular(10))),
+                color: LightColor.lightGrey.withAlpha(100),
+                borderRadius: BorderRadius.all(Radius.circular(10)),
+              ),
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: "Search Products",
-                    hintStyle: TextStyle(fontSize: 12),
-                    contentPadding:
-                    EdgeInsets.only(left: 10, right: 10, bottom: 0, top: 5),
-                    prefixIcon: Icon(Icons.search, color: Colors.black54)),
+                  border: InputBorder.none,
+                  hintText: "Search Products",
+                  hintStyle: TextStyle(fontSize: 12),
+                  contentPadding:
+                  EdgeInsets.only(left: 10, right: 10, bottom: 0, top: 5),
+                  prefixIcon: Icon(Icons.search, color: Colors.black54),
+                ),
               ),
             ),
           ),

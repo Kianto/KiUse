@@ -68,9 +68,10 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(13)),
-          color: Theme.of(context).backgroundColor,
-          boxShadow: AppTheme.shadow),
+        borderRadius: BorderRadius.all(Radius.circular(13)),
+        color: Theme.of(context).backgroundColor,
+        boxShadow: AppTheme.shadow,
+      ),
       child: Icon(
         icon,
         color: color,
@@ -132,7 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
       case 4:
         if (bodyScreen is! ExchangeScreen) {
           setState(() {
-            bodyScreen = ExchangeScreen();
+            bodyScreen = ExchangeScreen(user: widget.user,);
           });
         }
         break;
