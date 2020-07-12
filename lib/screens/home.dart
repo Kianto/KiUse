@@ -188,6 +188,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
                 onIconPresedCallback: onBottomIconPressed,
               ),
+
             )
           ],
         ),

@@ -8,7 +8,7 @@ class CouponCollector extends Collector {
     return [
       Coupon(
         id: '01',
-        image: 'assets/favicon.png',
+        image: 'assets/images/gift_tea.png',
         point: 20,
         discount: 20,
         gift: 'Flower Tea',
@@ -16,7 +16,7 @@ class CouponCollector extends Collector {
       ),
       Coupon(
         id: '02',
-        image: 'assets/favicon.png',
+        image: 'assets/images/gift_tree.png',
         point: 50,
         discount: 100,
         gift: 'Little Tree',
@@ -24,7 +24,7 @@ class CouponCollector extends Collector {
       ),
       Coupon(
         id: '03',
-        image: 'assets/favicon.png',
+        image: 'assets/images/gift_jacket.png',
         point: 140,
         discount: 50,
         gift: 'Safe World Jacket',
@@ -32,7 +32,7 @@ class CouponCollector extends Collector {
       ),
       Coupon(
         id: '04',
-        image: 'assets/favicon.png',
+        image: 'assets/images/gift_milk_tea.png',
         point: 60,
         discount: 80,
         gift: 'Milk Tea',
@@ -40,7 +40,7 @@ class CouponCollector extends Collector {
       ),
       Coupon(
         id: '05',
-        image: 'assets/favicon.png',
+        image: 'assets/images/gift_hat.png',
         point: 20,
         discount: 200,
         gift: 'Natural Legend Hat',
